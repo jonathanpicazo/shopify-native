@@ -10,17 +10,27 @@ const Home = () => {
         const url = new URL(`https://${shopName}/api/2021-07/graphql`);
         const storefrontToken = "56e368aa9a0de5daf9f70012daf70d7b";
         const query = `
-      {
-        products(first: 3) {
-          edges {
-            node {
-              id
-              title
+          query getCollectionByHandle($handle: String!){
+            collection(handle: $handle) {
+              products(first: 10) {
+                edges {
+                  node {
+                    id
+                    title
+                    priceRange {
+                      minVariantPrice {
+                        amount
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
-        }
-      }
-    `;
+      `;
+        const variables = {
+          handle: "mens-hair",
+        };
         const options = {
           method: "POST",
           headers: {
@@ -28,13 +38,13 @@ const Home = () => {
             "Content-Type": "application/json",
             "X-Shopify-Storefront-Access-Token": storefrontToken,
           },
-          body: JSON.stringify({ query }),
+          body: JSON.stringify({ query, variables }),
         };
-        console.log("yes");
         const res = await fetch(url, options);
         console.log(JSON.stringify(res, null, 4));
         const resJson = await res.json();
-        const products = resJson.data.products.edges;
+        console.log("resJson", resJson);
+        const products = resJson.data.collection.products.edges;
         console.log("products", products);
         return products;
       } catch (error) {
