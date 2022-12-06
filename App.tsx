@@ -1,51 +1,45 @@
-import * as React from "react";
-import { View, Text, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "./components/home";
-import Cart from "./components/cart";
+import { HomeTab, CartTab } from "./tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { TailwindProvider } from "tailwind-rn";
-import utilities from "./tailwind.json";
-const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <TailwindProvider utilities={utilities}>
-        {/* <Stack.Navigator>
-        <Stack.Screen name="Wholesale" component={HomeScreen} />
-      </Stack.Navigator> */}
-        <Tab.Navigator
-          initialRouteName={"Home"}
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName;
-              let rn = route.name;
+      <Tab.Navigator
+        initialRouteName={"Home"}
+        screenOptions={({ route }) => ({
+          tabBarStyle: {
+            backgroundColor: "#802A19",
+          },
+          tabBarItemStyle: {
+            height: 70,
+          },
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+            let rn = route.name;
 
-              if (rn === "Home") {
-                iconName = focused ? "home" : "home-outline";
-              } else if (rn === "Cart") {
-                iconName = focused ? "cart" : "cart-outline";
-              }
+            if (rn === "Home") {
+              iconName = focused ? "home" : "home-outline";
+            } else if (rn === "Cart") {
+              iconName = focused ? "cart" : "cart-outline";
+            }
 
-              // You can return any component that you like here!
-              return <Ionicons name={iconName} size={size} color={color} />;
-            },
-          })}
-          tabBarOptions={{
-            activeTintColor: "#802A19",
-            inactiveTintColor: "grey",
-            labelStyle: { paddingBottom: 10, fontSize: 10 },
-            style: { padding: 10, height: 70 },
-          }}
-        >
-          <Tab.Screen name="Home" component={Home} />
-          <Tab.Screen name="Cart" component={Cart} />
-        </Tab.Navigator>
-      </TailwindProvider>
+            // You can return any component that you like here!
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: "white",
+          tabBarInactiveTintColor: "grey",
+          tabBarLabelStyle: {
+            paddingBottom: 5,
+            fontSize: 10,
+          },
+        })}
+      >
+        <Tab.Screen name="Home" component={HomeTab} />
+        <Tab.Screen name="Cart" component={CartTab} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };
