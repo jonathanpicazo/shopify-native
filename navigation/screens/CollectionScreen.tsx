@@ -1,7 +1,7 @@
 import { View, Image, Text } from "react-native";
 import { useEffect, useState } from "react";
-import Collection from "../components/collection";
-import { collectionByHandle } from "../utils/queries";
+import { CollectionList } from "../../components";
+import { collectionByHandle } from "../../utils/queries";
 import { NavigationProp } from "@react-navigation/native";
 
 const CollectionScreen = ({ navigation }) => {
@@ -48,7 +48,7 @@ const CollectionScreen = ({ navigation }) => {
       {!allProducts ? (
         <Text>Loading</Text>
       ) : (
-        <Collection products={allProducts} navigation={navigation} />
+        <CollectionList products={allProducts} navigation={navigation} />
       )}
     </View>
   );

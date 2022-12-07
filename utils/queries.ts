@@ -24,6 +24,9 @@ export const collectionByHandle = `
                     id
                     src
                   }
+                  priceV2 {
+                    amount
+                  }
                 }
               }
             }
