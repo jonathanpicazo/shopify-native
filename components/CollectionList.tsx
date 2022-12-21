@@ -7,7 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-const Collection = ({
+const CollectionList = ({
   route,
   navigation,
   products,
@@ -77,4 +77,4 @@ const Collection = ({
   );
 };
 
-export default Collection;
+export default CollectionList;

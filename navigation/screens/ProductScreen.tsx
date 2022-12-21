@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   View,
   Text,
@@ -9,6 +9,8 @@ import {
   SafeAreaView,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
+import { CartContext } from "../../contexts/CartContext";
+
 const ProductScreen = ({ navigation, route }) => {
   const destructureProduct = (product) => {
     const { node } = product;
@@ -18,10 +20,10 @@ const ProductScreen = ({ navigation, route }) => {
   const [selectedVariant, setSelectedVariant] = useState(
     destructureProduct(product.variants.edges[0])
   );
-  console.log("on product", product);
-  console.log("show Picker", product.variants.edges.length > 1);
+  const { addProductToCart, checkout } = useContext(CartContext);
   const addToCart = (variant) => {
     console.log("add to cart", variant);
+    addProductToCart(variant);
   };
   return (
     <>
@@ -30,6 +32,7 @@ const ProductScreen = ({ navigation, route }) => {
           <Image
             source={{ uri: selectedVariant.image.src }}
             style={styles.image}
+            resizeMode={"contain"}
           />
           <Text>{product.title}</Text>
           {selectedVariant.title !== "Default Title" && (
@@ -38,6 +41,7 @@ const ProductScreen = ({ navigation, route }) => {
           <Text>{selectedVariant.priceV2.amount}</Text>
           {product.variants.edges.length > 1 && (
             <Picker
+              style={styles.picker}
               selectedValue={selectedVariant}
               onValueChange={(itemValue, itemIndex) =>
                 setSelectedVariant(itemValue)
@@ -47,6 +51,7 @@ const ProductScreen = ({ navigation, route }) => {
                 <Picker.Item
                   label={_variant.node.title}
                   value={_variant.node}
+                  key={_variant.node.id}
                 />
               ))}
             </Picker>
@@ -84,6 +89,10 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
+  },
+  picker: {
+    width: 200,
+    fontSize: 10,
   },
 });
 

@@ -27,6 +27,9 @@ export const collectionByHandle = `
                   priceV2 {
                     amount
                   }
+                  product {
+                    title
+                  }
                 }
               }
             }
