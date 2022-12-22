@@ -1,7 +1,7 @@
 import { SHOPIFY_MY_SHOPIFY, SHOPIFY_STOREFRONT_TOKEN } from "@env";
 export const fetchStorefront = async (query: string, variables?: any) => {
   try {
-    const url = new URL(`https://${SHOPIFY_MY_SHOPIFY}/api/2021-07/graphql`);
+    const url = new URL(`https://${SHOPIFY_MY_SHOPIFY}/api/2022-10/graphql`);
     const options = {
       method: "POST",
       headers: {

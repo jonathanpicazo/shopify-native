@@ -4,7 +4,7 @@ import { CollectionList } from "../../components";
 import { collectionByHandle } from "../../utils/queries";
 import { NavigationProp } from "@react-navigation/native";
 import { fetchStorefront } from "../../utils";
-const CollectionScreen = ({ navigation }) => {
+const CollectionScreen = ({ navigation }: { navigation: any }) => {
   const [allProducts, setAllProducts] = useState(null);
   useEffect(() => {
     const fetchProducts = async () => {

@@ -11,25 +11,24 @@ const DefaultContext = {
     lineItems: [],
   },
   addProductToCart: (variant: any) => {},
-  setCheckout: (value: any) => {},
 };
 
 export const CartContext = createContext(DefaultContext);
 
-export const CartProvider = ({ children }) => {
+export const CartProvider = ({ children }: { children: any }) => {
   const defaultCheckout = {
     lineItems: [],
   };
 
   const [checkout, setCheckout] = useState<any>(defaultCheckout);
 
-  const addProductToCart = (variant) => {
+  const addProductToCart = (variant: any) => {
     try {
-      let newCheckout = checkout;
+      let newCheckout = { ...checkout };
       // boolean to determine whether a duplicate item exists
       let foundDuplicate = false;
       // find duplicate item if it exists, update quantity
-      const newLineItems = newCheckout.lineItems.map((el) => {
+      const newLineItems = newCheckout.lineItems.map((el: any) => {
         if (el.shopifyVariant.id === variant.id) {
           // update quantity
           el.quantity += 1;
@@ -57,7 +56,6 @@ export const CartProvider = ({ children }) => {
   const value = useMemo(() => {
     return {
       checkout,
-      setCheckout,
       addProductToCart,
     };
   }, [checkout, addProductToCart]);

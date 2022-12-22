@@ -11,8 +11,14 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import { CartContext } from "../../contexts/CartContext";
 
-const ProductScreen = ({ navigation, route }) => {
-  const destructureProduct = (product) => {
+const ProductScreen = ({
+  navigation,
+  route,
+}: {
+  navigation: any;
+  route: any;
+}) => {
+  const destructureProduct = (product: any) => {
     const { node } = product;
     return node;
   };
@@ -20,8 +26,8 @@ const ProductScreen = ({ navigation, route }) => {
   const [selectedVariant, setSelectedVariant] = useState(
     destructureProduct(product.variants.edges[0])
   );
-  const { addProductToCart, checkout } = useContext(CartContext);
-  const addToCart = (variant) => {
+  const { addProductToCart } = useContext(CartContext);
+  const addToCart = (variant: any) => {
     console.log("add to cart", variant);
     addProductToCart(variant);
   };
@@ -39,7 +45,7 @@ const ProductScreen = ({ navigation, route }) => {
             <Text>{selectedVariant.title}</Text>
           )}
           <Text>{selectedVariant.priceV2.amount}</Text>
-          {product.variants.edges.length > 1 && (
+          {/* {product.variants.edges.length > 1 && (
             <Picker
               style={styles.picker}
               selectedValue={selectedVariant}
@@ -55,7 +61,7 @@ const ProductScreen = ({ navigation, route }) => {
                 />
               ))}
             </Picker>
-          )}
+          )} */}
           <TouchableOpacity
             style={styles.button}
             onPress={() => addToCart(selectedVariant)}

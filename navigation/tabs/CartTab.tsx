@@ -12,8 +12,8 @@ import { useFocusEffect } from "@react-navigation/native";
 import { CartContext } from "../../contexts/CartContext";
 import { CheckoutScreen } from "../screens";
 
-const CartItem = ({ item }) => {
-  const renderTitle = (variant) => {
+const CartItem = ({ item }: { item: any }) => {
+  const renderTitle = (variant: any) => {
     if (variant.title !== "Default Title") {
       return `${variant.product.title} - ${variant.title}`;
     }
@@ -36,7 +36,7 @@ const CartTab = () => {
   const [count, setCount] = useState(0);
   const { checkout } = useContext(CartContext);
 
-  const renderItem = (listItem) => {
+  const renderItem = (listItem: any) => {
     return <CartItem item={listItem.item} />;
   };
 
@@ -65,7 +65,7 @@ const CartTab = () => {
                 style={styles.list}
                 data={checkout.lineItems}
                 renderItem={renderItem}
-                keyExtractor={(item) => item.shopifyVariant.id}
+                keyExtractor={(item: any) => item.shopifyVariant.id}
               ></FlatList>
               <CheckoutScreen />
             </SafeAreaView>

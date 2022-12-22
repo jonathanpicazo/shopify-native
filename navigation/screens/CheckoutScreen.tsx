@@ -31,8 +31,9 @@ const CheckoutScreen = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
-        body: JSON.stringify(checkout),
+        body: JSON.stringify({ ...checkout }),
       });
       const { paymentIntent, ephemeralKey, customer } = await response.json();
 
