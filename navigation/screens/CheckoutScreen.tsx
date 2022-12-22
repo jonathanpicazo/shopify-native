@@ -48,7 +48,7 @@ const CheckoutScreen = () => {
   };
 
   const initializePaymentSheet = async () => {
-    const { paymentIntent, ephemeralKey, customer, publishableKey } =
+    const { paymentIntent, ephemeralKey, customer, publishableKey }: any =
       await fetchPaymentSheetParams();
     const { error } = await initPaymentSheet({
       appearance: customStripeAppearance,

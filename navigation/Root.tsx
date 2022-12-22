@@ -34,6 +34,7 @@ const Root = () => {
                 }
 
                 // You can return any component that you like here!
+                //@ts-ignore
                 return <Ionicons name={iconName} size={size} color={color} />;
               },
               tabBarActiveTintColor: "white",
